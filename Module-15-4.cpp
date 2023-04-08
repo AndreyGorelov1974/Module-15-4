@@ -16,7 +16,7 @@
 #include <algorithm>
 
 //размер массива
-const int sizeArray = 10;
+const size_t sizeArray = 10;
 
 int main()
 {
@@ -36,5 +36,34 @@ int main()
 	{
 		std::cout << arr[i] << " ";
 	}
-	
+	std::cout << std::endl;
+
+	size_t indexMin = 0;
+	size_t indexMax = 0;
+
+	for (size_t i = 0; i < sizeArray; ++i)
+	{
+		if (arr[i] > 0 && i > 0) {
+			indexMin = i - 1;
+			indexMax = i;
+		}
+	}
+
+	while (indexMin > 0 || indexMax < (sizeArray - 1)) {
+		if (abs(arr[indexMin]) > arr[indexMax]) {
+			std::cout << arr[indexMax] << " ";
+			++indexMax;
+		}
+		else {
+			std::cout << abs(arr[indexMin]) << " ";
+			--indexMin;
+		}
+	}
+
+	/*if (abs(arr[0]) > arr[sizeArray - 1]) {
+		std::cout << arr[sizeArray - 1] << " " << abs(arr[0]);
+	}
+	else {
+		std::cout << abs(arr[0]) << " " << arr[sizeArray - 1];
+	}*/
 }
