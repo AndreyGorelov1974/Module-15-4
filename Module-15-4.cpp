@@ -32,7 +32,7 @@ int main()
 	std::sort(arr, &arr[sizeArray]);
 
 	//вывод отсортированного массива
-	for (int i = 0; i < sizeArray; ++i)
+	for (size_t i = 0; i < sizeArray; ++i)
 	{
 		std::cout << arr[i] << " ";
 	}
@@ -46,24 +46,12 @@ int main()
 		if (arr[i] > 0 && i > 0) {
 			indexMin = i - 1;
 			indexMax = i;
+			break;
 		}
 	}
 
-	while (indexMin > 0 || indexMax < (sizeArray - 1)) {
-		if (abs(arr[indexMin]) > arr[indexMax]) {
-			std::cout << arr[indexMax] << " ";
-			++indexMax;
-		}
-		else {
-			std::cout << abs(arr[indexMin]) << " ";
-			--indexMin;
-		}
+	for (size_t i = indexMax; i < sizeArray; ++i) {
+		std::cout << arr[i] << " ";
 	}
-
-	/*if (abs(arr[0]) > arr[sizeArray - 1]) {
-		std::cout << arr[sizeArray - 1] << " " << abs(arr[0]);
-	}
-	else {
-		std::cout << abs(arr[0]) << " " << arr[sizeArray - 1];
-	}*/
+	
 }
