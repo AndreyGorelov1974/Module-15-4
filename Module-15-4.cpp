@@ -11,57 +11,30 @@
 
 Советы и рекомендации
 Положительные числа уже отсортированы в порядке возрастания модулей.*/
-#include <iostream>
-#include <vector>
 
+#include <iostream>
+#include <algorithm>
+
+//размер массива
+const int sizeArray = 10;
 
 int main()
 {
-	//инициализируем вектор 
-	std::vector<int> userVector(0);
-	//инициализируем переменную для ввода элемента массива 
-	int elements = 0;
-	//инициализируем индекс для сортировки 
-	size_t index = 0;
+	//инициализируем массив 
+	int arr[sizeArray];
 
-	//ввод первого элемента
-	std::cout << "Input numbers: ";
-	std::cin >> elements;
-
-	//основной цикл продолжается пока не ввели -2
-	while (elements != -2) {
-		//если ввели -1 
-		if (elements == -1) {
-			//проверяем длинну вектора
-			if (userVector.size() < 5) {
-				//если меньше 5 выводим предупреждение
-				std::cout << "There are still less than five elements in the array!" << std::endl;
-			}
-			else {
-				//если больше 5 выводим 5 по порядку элемент
-				std::cout << "Five element: " << userVector[4] << std::endl;
-			}
-		}
-		//если ввели новый элемент вектора
-		else {
-			//вставляем его в конец вектора
-			userVector.push_back(elements);
-			//устанавливаем индекс на новый элемент
-			index = userVector.size() - 1;
-			//двигаемего к началу на своё место по порядку
-			while ((index > 0) && (userVector[index] < userVector[index - 1])) {
-				std::swap(userVector[index], userVector[index - 1]);
-				--index;
-			}
-		}
-		//вывод отсортированного вектора
-		for (int i = 0; i < userVector.size(); ++i)
-		{
-			std::cout << userVector[i] << " ";
-		}
-		std::cout << std::endl;
-		//ввод следующего элемента
-		std::cout << "Input numbers: ";
-		std::cin >> elements;
+	//заполняем массив случайными числами
+	srand(time(NULL));
+	for (int i = 0; i < sizeArray; ++i) {
+		rand() % 2 == 0 ? arr[i] = rand() % 100 : arr[i] = -1 * (rand() % 100);
 	}
+	//сортируем массив
+	std::sort(arr, &arr[sizeArray]);
+
+	//вывод отсортированного массива
+	for (int i = 0; i < sizeArray; ++i)
+	{
+		std::cout << arr[i] << " ";
+	}
+	
 }
