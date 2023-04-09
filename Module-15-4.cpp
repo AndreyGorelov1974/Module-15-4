@@ -16,33 +16,34 @@
 #include <algorithm>
 
 //размер массива
-const size_t sizeArray = 10;
+const int sizeArray = 10;
 
 int main()
 {
 	//инициализируем массив 
-	int arr[sizeArray] = { -10,-9, -8, -7, -6,-5, -4,5,9,8 };
+	int arr[sizeArray];
 
-	////заполняем массив случайными числами
-	//srand(time(NULL));
-	//for (int i = 0; i < sizeArray; ++i) {
-	//	rand() % 2 == 0 ? arr[i] = rand() % 100 : arr[i] = -1 * (rand() % 100);
-	//}
-	////сортируем массив
+	//заполняем массив случайными числами
+	srand(time(NULL));
+	for (int i = 0; i < sizeArray; ++i) {
+		rand() % 2 == 0 ? arr[i] = rand() % 100 : arr[i] = -1 * (rand() % 100);
+	}
+	//сортируем массив
 	std::sort(arr, &arr[sizeArray]);
 
 	//вывод отсортированного массива
-	for (size_t i = 0; i < sizeArray; ++i)
-	{
+	for (size_t i = 0; i < sizeArray; ++i) {
 		std::cout << arr[i] << " ";
 	}
 	std::cout << std::endl;
 
-	int indexMin = 0;
-	int indexMax = 0;
+	//индексы для отрицательных и положительных элементов
+	//по умолчанию инициализируем их размером массива на случай если все элементы отрицательные
+	int indexMin = sizeArray - 1;
+	int indexMax = sizeArray;
 
-	for (size_t i = 0; i < sizeArray; ++i)
-	{
+	//ищем границу между отрицательными и положительными элементами
+	for (size_t i = 0; i < sizeArray; ++i) {
 		if (arr[i] > 0 && i > 0) {
 			indexMin = i - 1;
 			indexMax = i;
@@ -50,13 +51,18 @@ int main()
 		}
 	}
 
+	//цикл для вывода всех положительных элементов
 	for (size_t i = indexMax; i < sizeArray; ++i) {
+		//на каждой итерации проверяем есть ли отрицательные элементы с меньшим модулем и выводим их
+		//первое условие ограничивает поиск элементом с индексом 0
 		while ((indexMin > -1) && (abs(arr[indexMin]) < arr[i])) {
 			std::cout << arr[indexMin] << " ";
 			--indexMin;
 		}
 		std::cout << arr[i] << " ";
 	}
+
+	//если после основного цикла ещё остались отрицательные элементы выводи их
 	if (indexMin > -1) {
 		for (int i = indexMin; i >= 0; --i) {
 			std::cout << arr[i] << " ";
