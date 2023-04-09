@@ -21,14 +21,14 @@ const size_t sizeArray = 10;
 int main()
 {
 	//инициализируем массив 
-	int arr[sizeArray];
+	int arr[sizeArray] = { -10,-9, -8, -7, -6,-5, -4,5,9,8 };
 
-	//заполняем массив случайными числами
-	srand(time(NULL));
-	for (int i = 0; i < sizeArray; ++i) {
-		rand() % 2 == 0 ? arr[i] = rand() % 100 : arr[i] = -1 * (rand() % 100);
-	}
-	//сортируем массив
+	////заполняем массив случайными числами
+	//srand(time(NULL));
+	//for (int i = 0; i < sizeArray; ++i) {
+	//	rand() % 2 == 0 ? arr[i] = rand() % 100 : arr[i] = -1 * (rand() % 100);
+	//}
+	////сортируем массив
 	std::sort(arr, &arr[sizeArray]);
 
 	//вывод отсортированного массива
@@ -38,8 +38,8 @@ int main()
 	}
 	std::cout << std::endl;
 
-	size_t indexMin = 0;
-	size_t indexMax = 0;
+	int indexMin = 0;
+	int indexMax = 0;
 
 	for (size_t i = 0; i < sizeArray; ++i)
 	{
@@ -51,7 +51,15 @@ int main()
 	}
 
 	for (size_t i = indexMax; i < sizeArray; ++i) {
+		while ((indexMin > -1) && (abs(arr[indexMin]) < arr[i])) {
+			std::cout << arr[indexMin] << " ";
+			--indexMin;
+		}
 		std::cout << arr[i] << " ";
 	}
-	
+	if (indexMin > -1) {
+		for (int i = indexMin; i >= 0; --i) {
+			std::cout << arr[i] << " ";
+		}
+	}
 }
